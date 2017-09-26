@@ -2,31 +2,92 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>HTML Canvas API</title>
-  <script>
-    
-  window.onload = function() {
-	
-	var canvas = document.getElementById("canvas"),
-			context = canvas.getContext("2d");
-	
-// 	context.fillRect(50,50,300,200);
-	
-	context.beginPath();
-	context.moveTo(100,100);
-	context.lineTo(300, 300);
-	context.lineTo(300, 200);
-	context.lineTo(100, 400);
-	context.closePath();
-	context.stroke();
-	
-};
-    
-  </script>
+  <meta name="viewport" content="width=device-width">
+  <title>Cnvs</title>
+    <style>
+    *{
+  margin: 0;
+  padding: 0;
+}
+        canvas{
+            padding: 0;
+            margin: 0;
+        }
+        
+    </style>
 </head>
 <body>
 
-<canvas id="canvas" width="600" height="600"></canvas>	
+    <canvas></canvas>
+
+
+
+<script>
+
+var canvas = document.querySelector('canvas');
+canvas.width = window.innerWidth -5;
+canvas.height = window.innerHeight -5;
+
+var c = canvas.getContext('2d');
+
+c.beginPath();
+c.moveTo(50,300);
+c.lineTo(300,100);
+c.lineTo(300,200);
+c.lineTo(300,300);  
+c.lineTo(50,300);    
+c.strokeStyle = '#fa34a3';
+c.stroke();
+
+c.beginPath();
+c.moveTo(500,300);
+c.lineTo(500,100);
+c.lineTo(100,300);
+c.lineTo(500,300);  
+c.lineTo(300,100);    
+c.strokeStyle = '#fa34a3';
+c.stroke();    
+
+for(var i=0;i<100;i++){
+   var x = Math.random() * window.innerWidth;
+   var y = Math.random() * window.innerHeight;
+   c.beginPath();
+   c.arc(x,y,1,0,Math.PI*2, false);
+   c.strokeStyle = 'red';
+   c.stroke();
+ }
+
+
+var x=100;
+var dx=10;
+    
+var y=400;
+var dy=10;
+    
+var radius = 1;
+    function animate(){
+        requestAnimationFrame(animate)
+//    c.clearRect(0,0,innerWidth,innerHeight);
+    
+        
+        
+    c.beginPath();
+    c.arc(x,y,radius,0,Math.PI*2, false);
+    c.strokeStyle = 'green';
+    c.stroke();
+    
+        if( x + radius > innerWidth || x - radius < 0 ){
+           dx = -dx;
+        }
+        if( y + radius > innerHeight || y - radius < 0 ){
+           dy = -dy;
+        }
+            
+        x += dx;    
+        y += dy;    
+}
+    animate();
+</script>
 
 </body>
 </html>
